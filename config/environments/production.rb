@@ -80,4 +80,7 @@ Bloccit::Application.configure do
 
   # Do not dump schema after migrations.
   # config.active_record.dump_schema_after_migration = false
+
+  # http://mbova-reddit-clone.herokuapp.com
+  config.action_mailer.default_url_options = { host: 'mbova-reddit-clone.herokuapp.com' }
 end
