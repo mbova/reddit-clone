@@ -31,6 +31,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'bootstrap-sass', '~> 3.1.1'
 gem 'fog'
+gem 'will_paginate', '~> 3.0.5'
 
 gem 'spring',        group: :development
 
