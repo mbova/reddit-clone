@@ -1,1 +1,3 @@
-<p><%= @post.comments %></p>
+<% post.comments.each do | comment | %>
+  <%= comment.body %>
+<% end %>
