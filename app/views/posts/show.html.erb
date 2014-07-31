@@ -2,6 +2,7 @@
 
 <div class="row">
   <div class="col-md-8">
+    <%= render partial: 'votes/voter', locals: { post: @post } %>
     <small>
        <%= image_tag(@post.image.url) if @post.image? %>
        submitted <%= time_ago_in_words(@post.created_at) %> ago by
@@ -10,14 +11,15 @@
     <p><%= @post.markdown_body %></p>
     <hr />
     <div class="row">
+      <% if current_user %>
+        <%= render partial: 'comments/form', locals: { topic: @topic, post: @post, comment: @comment } %>
+      <% end %>
+      <hr />
       <h4>Comments</h4>
       <%= render partial: 'comments/comment', collection: @comments %>
     </div>
   </div>
   <div class="col-md-4">
-    <% if current_user %>
-      <%= render partial: 'comments/form', locals: { topic: @topic, post: @post, comment: @comment } %>
-    <% end %>
     <% if policy(@post).edit? %>
       <%= link_to "Edit", edit_topic_post_path(@topic, @post), class: 'btn btn-success' %>
     <% end %>
