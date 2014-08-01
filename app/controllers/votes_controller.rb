@@ -18,7 +18,7 @@ class VotesController < ApplicationController
   private
 
   def setup
-    @post = @topic.posts.find(params[:post_id])
+    @post = Post.find(params[:post_id])
     @topic = @post.topic
     @vote = @post.votes.where(user_id: current_user.id).first
   end
@@ -32,7 +32,6 @@ class VotesController < ApplicationController
       authorize @vote, :create?
       @vote.save
     end
-  redirect_to :back
   end
 
 end
