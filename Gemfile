@@ -10,15 +10,13 @@ end
 group :development do
   gem 'sqlite3'
 end
-<<<<<<< HEAD
-=======
 
 group :test do
   gem 'rspec-rails'
 end
 
 # Use SCSS for stylesheets
->>>>>>> install-rspec
+
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
 

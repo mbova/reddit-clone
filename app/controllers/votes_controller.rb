@@ -1,20 +1,25 @@
 class VotesController < ApplicationController
-  before_action :load_post_and_vote
-  
+  before_filter :setup
+
   def up_vote
     update_vote(1)
+
+    # no flash message, just want it to "happen"
     redirect_to :back
   end
 
   def down_vote
     update_vote(-1)
+
+    # no flash message, just want it to "happen"
     redirect_to :back
   end
 
   private
 
-  def load_post_and_vote
+  def setup
     @post = Post.find(params[:post_id])
+    @topic = @post.topic
     @vote = @post.votes.where(user_id: current_user.id).first
   end
 
@@ -28,4 +33,5 @@ class VotesController < ApplicationController
       @vote.save
     end
   end
+
 end
