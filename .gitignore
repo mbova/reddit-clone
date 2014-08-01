@@ -19,3 +19,5 @@
 /config/application.yml
 
 /rails-dev-box/*
+
+.DS_Store
