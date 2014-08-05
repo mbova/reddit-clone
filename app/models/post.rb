@@ -14,7 +14,6 @@ class Post < ActiveRecord::Base
   # validates :topic, presence: true
   # validates :user, presence: true
 
-  after_create :create_vote
 
   def up_votes
      votes.where(value: 1).count
@@ -43,17 +42,15 @@ class Post < ActiveRecord::Base
     self.update_attribute(:rank, new_rank)
   end
 
-  private
+  def create_vote
+    user.votes.create(value: 1, post: self)
+  end
 
   def render_as_markdown(text)
     renderer = Redcarpet::Render::HTML.new
     extensions = {fenced_code_blocks: true}
     redcarpet = Redcarpet::Markdown.new(renderer, extensions)
     (redcarpet.render text).html_safe
-  end
-
-  def create_vote
-    user.votes.create(value: 1, post: self)
   end
 
 end

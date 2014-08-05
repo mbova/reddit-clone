@@ -1,7 +1,7 @@
 class TopicsController < ApplicationController
   def index
-    @topics = Topic.paginate(page: params[:page], per_page: 10)
-    authorize @topics
+    @topics = Topic.visible_to(current_user).paginate(page: params[:page], per_page: 10)
+    authorize @topic
   end
 
   def new
@@ -54,6 +54,14 @@ class TopicsController < ApplicationController
       flash[:error] = "There was an error deleting the topic."
       render :show
     end
+  end
+
+  def public_topics
+    scope :visible_to, -> (user) { user ? all : where(public: true) }
+  end
+
+  def private_topics
+    scope :visible_to, -> (user) { user ? all : where(public: false) }
   end
 
   private

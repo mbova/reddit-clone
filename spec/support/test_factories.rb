@@ -1,17 +1,30 @@
 module TestFactories
-  
-  def post_without_user(options={})
-    post = Post.new(options)
-    allow(post).to receive(:create_vote)
-    post.save
-    post
+
+  def associated_post(options={})
+    user = authenticated_user
+    topic = Topic.create(name: 'Topic name')
+    Post.create(title: 'Post title', body: 'Post bodies must be pretty long', topic: topic, user: user)
+    post_options = { 
+      title: 'Post title', 
+      body: 'Post bodies must be pretty long.', 
+      topic: Topic.create(name: 'Topic name'), 
+      user: authenticated_user 
+    }.merge(options)
+    Post.create(post_options)
   end
 
-  def authenticated_user
-    email = "email#{rand}@fake.com"
-    user = User.new(email: email, password: 'password')
+  def authenticated_user(options={})
+    user_options = {email: "email#{rand}@fake.com", password: 'password'}.merge(options)
+    user = User.new(user_options)
     user.skip_confirmation!
     user.save
     user
+  end
+
+  def before_vote
+    request.env["HTTP_REFERER"] = '/'
+    @user = authenticated_user
+    @post = associated_post
+    sign_in @user
   end
 end

@@ -5,6 +5,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @comments = @post.comments
     @comment = Comment.new
+    authorize @topic
   end
 
   def new
@@ -26,6 +27,7 @@ class PostsController < ApplicationController
     authorize @post
 
     if @post.save
+      @post.create_vote
       flash[:notice] = "Post was saved."
       redirect_to [@topic, @post]
     else
