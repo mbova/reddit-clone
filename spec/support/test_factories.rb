@@ -1,7 +1,7 @@
 module TestFactories
   
   def post_without_user(options={})
-    post = Post.new(post_options)
+    post = Post.new(options)
     allow(post).to receive(:create_vote)
     post.save
     post
