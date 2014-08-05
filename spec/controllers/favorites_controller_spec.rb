@@ -7,7 +7,7 @@ require 'rails_helper'
  
    before do 
      @topic = Topic.create
-     @post = post_without_user({topic: @topic})
+     @post = associated_post({topic: @topic})
      @user = authenticated_user
      sign_in @user
    end

@@ -7,7 +7,7 @@ describe User do
   describe "#favorited(post)" do
 
     before do
-      @post = post_without_user
+      @post = associated_post
       @user = authenticated_user
     end
 
