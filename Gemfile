@@ -11,11 +11,15 @@ group :development do
   gem 'sqlite3'
 end
 
-group :test do
+group :development, :test do
   gem 'rspec-rails'
+  gem 'capybara'
+  gem 'spring'
+  gem 'spring-commands-rspec'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'pry-rails'
 end
-
-# Use SCSS for stylesheets
 
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
@@ -40,7 +44,7 @@ gem 'bootstrap-sass', '~> 3.1.1'
 gem 'fog'
 gem 'will_paginate', '~> 3.0.5'
 
-gem 'spring',        group: :development
+
 
 gem 'unicorn', group: :production
 gem 'thin', group: :development
