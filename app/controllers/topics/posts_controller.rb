@@ -1,5 +1,5 @@
 class Topics::PostsController < ApplicationController
-
+#desperate change to fix heroku
   def show
     @topic = Topic.find(params[:topic_id])
     @post = Post.find(params[:id])
