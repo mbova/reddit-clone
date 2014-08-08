@@ -8,7 +8,7 @@ class CreateVotes < ActiveRecord::Migration
       t.timestamps
     end
       add_index :votes, :user_id
-      unless column_exists? :votes, :hold_reason
+      unless index_exists? :index_votes_on_user_id
         add_index :votes, :post_id
       end
   end
