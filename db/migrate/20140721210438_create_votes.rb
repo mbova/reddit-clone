@@ -7,8 +7,10 @@ class CreateVotes < ActiveRecord::Migration
 
       t.timestamps
     end
-      add_index :votes, :user_id
       unless index_exists? :index_votes_on_user_id
+        add_index :votes, :user_id
+      end
+      unless index_exists? :index_votes_on_post_id
         add_index :votes, :post_id
       end
   end
