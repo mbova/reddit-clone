@@ -2,18 +2,16 @@ require 'rails_helper'
  
 describe "Visiting profiles" do
  
-  include TestFactories
- 
   before do 
-    @user = authenticated_user
-    @post = associated_post(user: @user)
-    @comment = Comment.new(user: @user, body: "A Comment")
+    @user = create(:user)
+    @post = create(:post, user: @user)
+    @comment = create(:comment, user: @user)
     allow(@comment).to receive(:send_favorite_emails)
     @comment.save
     
-    @admin = authenticated_user({role: 'admin'})
-    @adminpost = associated_post(user: @admin)
-    @admincomment = Comment.new(user: @admin, body: "Admin Comment")
+    @admin = create(:user, role: 'admin')
+    @adminpost = create(:post, user: @admin)
+    @admincomment = create(:comment, user: @admin)
     allow(@admincomment).to receive(:send_favorite_emails)
     @admincomment.save
   end

@@ -19,6 +19,8 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'pry-rails'
+  gem 'database_cleaner'
+  gem 'factory_girl_rails', '~> 4.0'
 end
 
 gem 'sass-rails', '~> 4.0.3'

@@ -1,4 +1,16 @@
 <%= simple_form_for([post, comment], html: { class: 'form-horizontal' }) do |f| %>
-  <%= f.input :body, as: :text %>
+  
+  <% if post.errors.any? %>
+    <div class="alert alert-danger">
+      <h4>There are <%= pluralize(post.errors.count, "error") %>.</h4>
+      <ul>
+        <% post.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.input :body, as: :text, placeholder: 'comments must have at least 5 characters' %>
   <%= f.button :submit %>
 <% end %>
